@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginAndRegister.LoginScreenActivity"
+    android:background="@drawable/login_screen_background">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="3dp"
+            android:autofillHints="LOGO"
+            />
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp"
+            android:hint="Email Id or Phone number"
+            android:layout_marginTop="30dp"
+            android:textColor="#ffff"
+            android:id="@+id/input_email"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColor="#ffff"
+            android:id="@+id/input_password"
+            />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Show Password"
+            android:id="@+id/showPassword"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Log in"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/round_corners_button"
+                android:textColor="#ffff"
+                android:id="@+id/login_button"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Register"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_corners_button"
+                android:textColor="#ffff"
+                android:id="@+id/register_btn"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_centerHorizontal="true"
+    android:visibility="visible"
+    android:layout_marginTop="100dp"
+    android:id="@+id/login_progressBar" android:layout_centerVertical="true"
+    />
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#e6004c</color>
+    <color name="colorPrimaryDark">#b3003b</color>
+    <color name="colorAccent">#ff9900</color>
+    <color name="background_dark">#e6004c</color>
+    <color name="background_light">#b3003b</color>
+    <color name="floatingactionbutton_home">#ff9900</color>
+</resources>
