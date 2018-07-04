@@ -2,13 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/rel_lay1_addTrainee">
+
+        <include layout="@layout/add_trainee_top_toolbar"/>
+
 
     </RelativeLayout>
     <RelativeLayout

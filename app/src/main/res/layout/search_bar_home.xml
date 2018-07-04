@@ -1,0 +1,24 @@
+<RelativeLayout
+    android:id="@+id/toolbar_serch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center_vertical"
+    android:layout_margin="5dp"
+    android:paddingLeft="10dp">
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="15sp"
+        android:padding="5dp"
+        android:background="@drawable/search_bar_background"
+        android:hint="Search"
+        android:textColor="@color/black"
+        >
+    </EditText>
+
+
+
+</RelativeLayout>

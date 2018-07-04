@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".LoginAndRegister.LoginScreenActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:autofillHints="LOGO"
+            android:src="@drawable/health_kitchen_logo_circle"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/background_text_view"
+            android:fontFamily="Noto Sans"
+            android:hint="E-mail Address"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:textColor="#595959" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_text_view">
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background_text_view"
+                android:hint="Password"
+                android:fontFamily="Noto Sans"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textSize="18sp"
+                android:textColor="#595959"/>
+
+            <ImageView
+                android:id="@+id/showPassword"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_show_password" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_corners_button"
+            android:text="Sign in"
+            android:fontFamily="Noto Sans"
+            android:textColor="#ffff"
+            android:textSize="16dp"
+            android:paddingTop="-2dp"
+            android:paddingBottom="-2dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New User?"
+            android:fontFamily="Noto Sans"
+            android:textStyle="italic"
+            android:textSize="15dp"
+            android:layout_marginTop="80dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="3dp"
+            android:background="@drawable/background_new_user_login_text"/>
+
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corners_button"
+            android:text="Sign Up"
+            android:fontFamily="Noto Sans"
+            android:textColor="#ffff"
+            android:textSize="16dp"
+            android:paddingTop="-2dp"
+            android:paddingBottom="-2dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/login_progressBar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
+        android:visibility="visible" />
+
+</RelativeLayout>

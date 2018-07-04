@@ -5,29 +5,66 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/health_kitchen_logo_circle"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/health_kitchen_logo_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginAndRegister.LoginScreenActivity">
+        <activity
+            android:name=".LoginAndRegister.LoginScreenActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAndRegister.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAndRegister.GymRegistration"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity.HomeActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ProfileActivity.ProfileActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FoodActivity.FoodActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".YourTraineeActivity.AddTraineeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".YourTraineeActivity.YourTraineeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DietActivity.DietActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FoodActivity.FoodActivityNext"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginAndRegister.RegisterActivity" />
-        <activity android:name=".LoginAndRegister.GymRegistration" />
-        <activity
-            android:name=".HomeActivity.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ProfileActivity.ProfileActivity" />
-        <activity android:name=".HomeActivity.FoodActivity" />
-        <activity android:name=".YourTraineeActivity.AddTraineeActivity" />
-        <activity android:name=".YourTraineeActivity.YourTraineeActivity" />
-        <activity android:name=".DietActivity.DietActivity"></activity>
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".FoodActivity.FoodItemActivity" />
+        <activity android:name=".SearchActivity.SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -1,30 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity.FoodActivity">
+    tools:context=".FoodActivity.FoodActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:id="@+id/rel_lay1_foodActivity">
+            <include layout="@layout/foodactivity_top_toolbar" />
+        </RelativeLayout>
+
+
+        <include layout="@layout/search_bar"
+            android:layout_below="@id/rel_lay1_foodActivity"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/searchBarLayoutFoodActivity"/>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchBarLayoutFoodActivity"
+            android:id="@+id/contentFoodScrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_food_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:nestedScrollingEnabled="false"
+                    >
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/rel_lay1_foodActivity">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar_Layout">
+    <include layout="@layout/progress_bar" />
 
-        <include layout="@layout/foodactivity_top_toolbar"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/rel_lay1_foodActivity">
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="5dp"
-        android:id="@+id/recycler_food_menu"
-        ></android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

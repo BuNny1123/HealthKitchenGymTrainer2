@@ -1,13 +1,38 @@
 package com.bunny.healthkitchengymtrainer.Model;
 
-public class Foods {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private  String Description;
+public class Foods implements Parcelable {
+
+    private String Description;
     private String Discount;
     private String Image;
     private String MenuCategory;
     private String Name;
     private String Price;
+
+    protected Foods(Parcel in) {
+        Description = in.readString();
+        Discount = in.readString();
+        Image = in.readString();
+        MenuCategory = in.readString();
+        Name = in.readString();
+        Price = in.readString();
+        key = in.readString();
+    }
+
+    public static final Creator<Foods> CREATOR = new Creator<Foods>() {
+        @Override
+        public Foods createFromParcel(Parcel in) {
+            return new Foods(in);
+        }
+
+        @Override
+        public Foods[] newArray(int size) {
+            return new Foods[size];
+        }
+    };
 
     public String getKey() {
         return key;
@@ -90,5 +115,21 @@ public class Foods {
         MenuCategory = menuCategory;
         Name = name;
         Price = price;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Description);
+        parcel.writeString(Discount);
+        parcel.writeString(Image);
+        parcel.writeString(MenuCategory);
+        parcel.writeString(Name);
+        parcel.writeString(Price);
+        parcel.writeString(key);
     }
 }

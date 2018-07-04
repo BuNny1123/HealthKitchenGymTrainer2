@@ -3,12 +3,29 @@ package com.bunny.healthkitchengymtrainer.DietActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bunny.healthkitchengymtrainer.FoodActivity.FoodActivity;
+import com.bunny.healthkitchengymtrainer.Model.Meal;
 import com.bunny.healthkitchengymtrainer.R;
+import com.bunny.healthkitchengymtrainer.Utils.RecyclerAdapterDietMeals;
+
+import java.util.ArrayList;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,8 +42,13 @@ public class MondayDietFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private Parcelable[] mParam1;
     private String mParam2;
+    ArrayList<Meal> meal;
+    TextView asd;
+    ArrayList<Meal> mondayDietArrayList;
+    RecyclerView recyclerView, recyclerViewExtended;
+    RelativeLayout extendedCardViewDietMeals;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,8 +78,21 @@ public class MondayDietFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            meal = getArguments().getParcelableArrayList("MealArrayList");
+
+
+            mondayDietArrayList = new ArrayList<>();
+            for (Meal temp : meal) {
+
+                if (temp.getDay().equals("Monday")) {
+                    mondayDietArrayList.add(temp);
+                }
+
+            }
+
+
+           // Toast.makeText(getActivity(), "" + mondayDietArrayList.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -65,7 +100,20 @@ public class MondayDietFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monday_diet, container, false);
+        View view = inflater.inflate(R.layout.fragment_monday_diet, container, false);
+//        asd = (TextView) view.findViewById(R.id.asd);
+//        asd.setText(mondayDietArrayList.toString());
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewMondayDietMeal);
+        RecyclerAdapterDietMeals recyclerAdapterDietMeals = new RecyclerAdapterDietMeals(mondayDietArrayList , getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation_fall_down);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.setAdapter(recyclerAdapterDietMeals);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

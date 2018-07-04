@@ -3,6 +3,7 @@ package com.bunny.healthkitchengymtrainer.ViewHolder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bunny.healthkitchengymtrainer.Interface.ItemClickListener;
@@ -12,6 +13,8 @@ public class CategoryMenuViewHolder extends RecyclerView.ViewHolder implements V
 
     public TextView txtMenuName;
     public ImageView imageView;
+    public ProgressBar progressBar_categoryCard;
+
 
     private ItemClickListener itemClickListener;
 
@@ -20,6 +23,9 @@ public class CategoryMenuViewHolder extends RecyclerView.ViewHolder implements V
 
         txtMenuName = (TextView) itemView.findViewById(R.id.menu_name);
         imageView = (ImageView) itemView.findViewById(R.id.menu_image);
+        progressBar_categoryCard = (ProgressBar) itemView.findViewById(R.id.progressbar_CategoryCardView);
+        progressBar_categoryCard.setVisibility(View.VISIBLE);
+
 
         itemView.setOnClickListener(this);
     }

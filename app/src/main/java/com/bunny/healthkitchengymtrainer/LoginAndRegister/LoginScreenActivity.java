@@ -1,8 +1,6 @@
 package com.bunny.healthkitchengymtrainer.LoginAndRegister;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +8,12 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +22,11 @@ import com.bunny.healthkitchengymtrainer.HomeActivity.HomeActivity;
 import com.bunny.healthkitchengymtrainer.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginScreenActivity extends AppCompatActivity {
@@ -35,7 +37,8 @@ public class LoginScreenActivity extends AppCompatActivity {
     Button login_btn;
     Button reg_btn;
     private FirebaseAuth mAuth;
-    CheckBox showPassword;
+    ImageView showPassword;
+    private int showPasswordFlag = 0;
 
     private static final String TAG = "LoginScreenActivity";
 
@@ -44,27 +47,36 @@ public class LoginScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_screen);
+        setContentView(R.layout.activity_login);
         login_btn = (Button) findViewById(R.id.login_button);
+
+        overridePendingTransition(R.anim.fadein , R.anim.fadeout);
+
 
 
         email_input = (TextView) findViewById(R.id.input_email);
         password_input = (TextView) findViewById(R.id.input_password);
         mProgressBar = (ProgressBar) findViewById(R.id.login_progressBar);
         reg_btn = (Button) findViewById(R.id.register_btn);
-        showPassword = (CheckBox) findViewById(R.id.showPassword);
+        showPassword = (ImageView) findViewById(R.id.showPassword);
         mAuth = FirebaseAuth.getInstance();
         mProgressBar.setVisibility(View.GONE);
 
-        showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-               if(showPassword.isChecked())
-                   password_input.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-               else
-                   password_input.setTransformationMethod(PasswordTransformationMethod.getInstance());
-           }
-       });
+        showPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(showPasswordFlag == 0) {
+                    password_input.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    showPassword.setImageResource(R.drawable.ic_show_password_black);
+                    showPasswordFlag = 1;
+
+                }else {
+                    password_input.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showPassword.setImageResource(R.drawable.ic_show_password);
+                    showPasswordFlag = 0;
+                }
+            }
+        });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -73,9 +85,11 @@ public class LoginScreenActivity extends AppCompatActivity {
                  String email = email_input.getText().toString();
                  String password = password_input.getText().toString();
 
+                 mProgressBar.setVisibility(View.VISIBLE);
+
                  if (!(email.isEmpty() || password.isEmpty())) {
 
-                    try{
+                     try{
                      mAuth.signInWithEmailAndPassword(email, password)
                              .addOnCompleteListener(LoginScreenActivity.this, new OnCompleteListener<AuthResult>() {
                                  @Override
@@ -83,29 +97,42 @@ public class LoginScreenActivity extends AppCompatActivity {
                                      if (task.isSuccessful()) {
                                          // Sign in success, update UI with the signed-in user's information
                                          Log.d(TAG, "signInWithEmail:success");
-                                         FirebaseUser user = mAuth.getCurrentUser();
+                                         if(mAuth.getCurrentUser().isEmailVerified()) {
+                                             FirebaseUser user = mAuth.getCurrentUser();
 
-                                         Toast toast = Toast.makeText(LoginScreenActivity.this, "Logged in as "+ user.getEmail(), Toast.LENGTH_SHORT);
-                                         View view = toast.getView();
-                                         view.setBackgroundResource(R.drawable.toast_background);
-                                         toast.show();
+                                             Toast toast = Toast.makeText(LoginScreenActivity.this, "Logged in as " + user.getEmail(), Toast.LENGTH_SHORT);
+                                             View view = toast.getView();
+                                             view.setBackgroundResource(R.drawable.toast_background);
+                                             toast.show();
 
-                                         Intent intent = new Intent(LoginScreenActivity.this, HomeActivity.class);
-                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                         startActivity(intent);
+                                             Intent intent = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                             startActivity(intent);
+                                         }else{
+                                             Toast.makeText(LoginScreenActivity.this, "Verify Your Email Id First", Toast.LENGTH_SHORT).show();
+                                             mProgressBar.setVisibility(View.GONE);
+                                         }
+
 
 
                                      } else {
+
+                                            try{
+                                                task.getException();
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
                                          // If sign in fails, display a message to the user.
                                          Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        // Toast.makeText(LoginScreenActivity.this, "Authentication failed.",
-                                          //       Toast.LENGTH_SHORT).show();
                                          AlertDialog.Builder mBuilder = new AlertDialog.Builder(LoginScreenActivity.this);
                                          mBuilder.setMessage("Wrong EmailID or Password ");
                                          mBuilder.setTitle("Error Message");
                                          mBuilder.setPositiveButton("OK" , null);
                                          mBuilder.setCancelable(true);
                                          mBuilder.create().show();
+
+                                         mProgressBar.setVisibility(View.GONE);
+
                                      }
 
                                  }
@@ -120,7 +147,10 @@ public class LoginScreenActivity extends AppCompatActivity {
                         mBuilder.setCancelable(true);
                         mBuilder.create().show();
 
-                    }
+                         mProgressBar.setVisibility(View.GONE);
+
+
+                     }
                  }else{
                      AlertDialog.Builder mBuilder = new AlertDialog.Builder(LoginScreenActivity.this);
                      mBuilder.setMessage("EmailID or Password cannot be left Blank");
@@ -128,6 +158,9 @@ public class LoginScreenActivity extends AppCompatActivity {
                      mBuilder.setPositiveButton("OK" , null);
                      mBuilder.setCancelable(true);
                      mBuilder.create().show();
+
+                     mProgressBar.setVisibility(View.GONE);
+
                  }
              }
          }
@@ -152,6 +185,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         if (currentUser != null) {
             Toast.makeText(this, "Logged in as " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
             startActivity(intent);
         } else {
             Toast.makeText(this, "Sign in Please", Toast.LENGTH_SHORT).show();

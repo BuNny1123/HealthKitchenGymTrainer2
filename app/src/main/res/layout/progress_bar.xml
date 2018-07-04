@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:background="@drawable/category_cardview_background"
+    android:layout_marginLeft="70dp"
+    android:layout_marginRight="70dp"
+    android:padding="16dp">
+
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/progressBar_progressBar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading ..."
+        android:layout_toRightOf="@id/progressBar_progressBar"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="40dp"/>
+
+
+
+
+</RelativeLayout>

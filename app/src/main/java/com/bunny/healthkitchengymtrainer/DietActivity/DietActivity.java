@@ -2,16 +2,20 @@ package com.bunny.healthkitchengymtrainer.DietActivity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bunny.healthkitchengymtrainer.HomeActivity.FoodActivity;
+import com.bunny.healthkitchengymtrainer.FoodActivity.FoodActivity;
+import com.bunny.healthkitchengymtrainer.Model.Meal;
+import com.bunny.healthkitchengymtrainer.Model.Trainee;
 import com.bunny.healthkitchengymtrainer.R;
 import com.bunny.healthkitchengymtrainer.Utils.PagerAdapterDiet;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class DietActivity extends AppCompatActivity
     implements MondayDietFragment.OnFragmentInteractionListener,
@@ -31,23 +37,70 @@ public class DietActivity extends AppCompatActivity
         SundayDietFragment.OnFragmentInteractionListener {
 
 
+    private static final String TAG = "DietActivity";
+    
+    
     TabLayout tabLayout;
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference myRef;
     String traineeId;
     FloatingActionButton addToDiet;
+    public  ArrayList<Meal> mealArrayList;
+    ViewPager viewPager;
+    PagerAdapterDiet adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void  onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
+
+        overridePendingTransition(R.anim.fadein , R.anim.fadeout);
+
 
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
+        myRef = database.getReference("Meals");
+        mealArrayList = new ArrayList<>();
+        traineeId = getIntent().getStringExtra("TraineeId");
+        myRef.keepSynced(true);
 
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                mealArrayList.clear();
+
+                for(DataSnapshot ds:dataSnapshot.child(traineeId).getChildren()){
+
+                    Meal meal1 =  ds.getValue(Meal.class);
+                    mealArrayList.add(meal1);
+
+                }
+                 //Log.d(TAG, "onCreate: " + mealArrayList.toString());
+                viewPager = (ViewPager) findViewById(R.id.pager_diet);
+                adapter = new PagerAdapterDiet(getSupportFragmentManager(), 7, mealArrayList);
+                viewPager.setAdapter(adapter);
+                viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        //Log.d(TAG, "onCreate: " + mealArrayList.toString());
+
+        //Toast.makeText(this, mealArrayList.toString(), Toast.LENGTH_SHORT).show();
         tabLayout = (TabLayout) findViewById(R.id.tabLayout_diet);
         addToDiet = (FloatingActionButton) findViewById(R.id.addToDiet);
 
@@ -58,12 +111,10 @@ public class DietActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText("Fri"));
         tabLayout.addTab(tabLayout.newTab().setText("Sat"));
         tabLayout.addTab(tabLayout.newTab().setText("Sun"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager_diet);
-        PagerAdapter adapter = new PagerAdapterDiet(getSupportFragmentManager(), 7);
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setTabGravity(TabLayout.MODE_SCROLLABLE);
+
+
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -83,8 +134,7 @@ public class DietActivity extends AppCompatActivity
         });
 
 
-        traineeId = getIntent().getStringExtra("TraineeId");
-        Toast.makeText(this, "" + traineeId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + traineeId, Toast.LENGTH_SHORT).show();
 
         addToDiet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,11 +143,11 @@ public class DietActivity extends AppCompatActivity
 
                 Intent intent = new Intent(DietActivity.this , FoodActivity.class);
                 intent.putExtra("TraineeIdAddToDiet", traineeId);
+                intent.putExtra("DayMenu", tabLayout.getSelectedTabPosition()+"");
+                intent.putExtra("TraineeId", getIntent().getStringExtra("TraineeId"));
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override

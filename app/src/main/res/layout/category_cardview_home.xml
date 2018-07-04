@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="230dp"
-    android:layout_height="230dp"
-    android:layout_margin="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_margin="10dp"
     android:orientation="vertical"
+    app:cardCornerRadius="20dp"
+    android:elevation="70dp"
     >
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/cards_category_background"
+        android:background="@drawable/category_cardview_background"
         >
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/menu_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:fadingEdge="horizontal"
-            android:layout_margin="1dp"
+            android:background="@drawable/category_cardview_background"
+            app:riv_corner_radius="20dip"
+            app:riv_mutate_background="true"
             />
 
 
@@ -29,12 +31,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/menu_image"
-            android:text="Name"
-            android:gravity="bottom|center"
-            android:textSize="20sp"
+            android:textSize="40dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_alignParentTop="true"
+            android:shadowColor="#595959"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+
 
             />
-    </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressbar_CategoryCardView"
+        android:layout_centerInParent="true"/>
 
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

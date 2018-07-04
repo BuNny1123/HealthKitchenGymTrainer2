@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreenActivity"
+    android:background="@drawable/background_gradient">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/health_kitchen_logo_circle"
+        android:id="@+id/logoSplashScreen"
+        android:layout_centerHorizontal="true"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WELCOME to"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/logoSplashScreen"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:id="@+id/welcomeTextSplashScreen"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health Kitchen"
+            android:textColor="@color/white"
+            android:layout_below="@+id/welcomeTextSplashScreen"
+            android:layout_centerInParent="true"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/HealthKitchenTextSplashScreen"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trainer App"
+            android:textColor="@color/white"
+            android:layout_below="@+id/HealthKitchenTextSplashScreen"
+            android:layout_centerInParent="true"
+            android:textStyle="italic"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

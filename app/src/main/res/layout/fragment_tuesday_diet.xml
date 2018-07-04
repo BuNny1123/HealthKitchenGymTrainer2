@@ -5,11 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".DietActivity.TuesdayDietFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Tuesday"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:id="@+id/asdTues"/>-->
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tuesday"
-        android:layout_gravity="center"/>
+        android:layout_marginTop="10dp"
+        android:id="@+id/recyclerViewTuesDietMeal"></android.support.v7.widget.RecyclerView>
+
+
+
 
 </FrameLayout>

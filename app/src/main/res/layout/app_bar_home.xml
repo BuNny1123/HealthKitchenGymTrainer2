@@ -15,13 +15,54 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/nav_header_background"
-            app:popupTheme="@style/AppTheme"
-            app:title="Health Kitchen"
-            android:textAlignment="center"
+            android:layout_height="75dp"
             android:layout_gravity="center"
-            />
+            android:background="@drawable/background_gradient_toolbar"
+            android:textAlignment="center"
+            android:paddingTop="25dp"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:id="@+id/linLay1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Health Kitchen"
+                    android:textSize="19sp"
+                    android:fontFamily="iFont"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    >
+                </TextView>
+
+
+                <ImageView
+                    android:id="@+id/myProfileHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/ic_my_profile_white"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    />
+v
+            </LinearLayout>
+
+
+
+
+        </android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
 
@@ -34,6 +75,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint='@color/floatingactionbutton_home'
-        app:srcCompat="@drawable/ic_dumbbell" />
+        app:srcCompat="@drawable/ic_person_deafault_white" />
 
 </android.support.design.widget.CoordinatorLayout>

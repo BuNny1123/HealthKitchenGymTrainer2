@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity.SearchActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/rel_lay1_searchActivity">
+        <include layout="@layout/search_activity_top_toolbar" />
+    </RelativeLayout>
+
+    <include layout="@layout/search_bar"
+        android:layout_below="@id/rel_lay1_searchActivity"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/search_bar_layout"/>
+
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tabLayout_search"
+        app:tabMode="fixed"
+        android:layout_below="@id/search_bar_layout"
+        android:fillViewport="true"
+        >
+
+    </android.support.design.widget.TabLayout>
+
+
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/pager_search"
+            android:background="@color/grey"
+            android:layout_below="@id/tabLayout_search"
+            ></android.support.v4.view.ViewPager>
+
+
+
+</RelativeLayout>

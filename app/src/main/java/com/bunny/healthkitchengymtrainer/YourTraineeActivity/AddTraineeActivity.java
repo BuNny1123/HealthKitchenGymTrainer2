@@ -1,5 +1,6 @@
 package com.bunny.healthkitchengymtrainer.YourTraineeActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,7 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bunny.healthkitchengymtrainer.Model.Trainee;
@@ -29,6 +34,7 @@ public class AddTraineeActivity extends AppCompatActivity {
 
     TextView searchText;
     TextView emailTrainee;
+    ImageView addTrainee_toolbar_backarrow;
     Button register_gym;
     private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -41,11 +47,24 @@ public class AddTraineeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trainee);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_trainee);
         mAuth = FirebaseAuth.getInstance();
         emailTrainee = (TextView) findViewById(R.id.email_trainee_cardView);
+        addTrainee_toolbar_backarrow = findViewById(R.id.addTrainee_toolbar_backarrow);
+        addTrainee_toolbar_backarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         traineeArrayList = new ArrayList<Trainee>();
 
@@ -57,6 +76,8 @@ public class AddTraineeActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                traineeArrayList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //Log.d(TAG, "onDataChange: " + ds.getValue());
                     traineeArrayList.add(ds.getValue(Trainee.class));

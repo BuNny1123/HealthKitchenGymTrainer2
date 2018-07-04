@@ -4,11 +4,23 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bunny.healthkitchengymtrainer.Model.Meal;
 import com.bunny.healthkitchengymtrainer.R;
+import com.bunny.healthkitchengymtrainer.Utils.RecyclerAdapterDietMeals;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +35,13 @@ public class WednesdayFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ArrayList<Meal> meal;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ArrayList<Meal> dietArrayList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,16 +71,40 @@ public class WednesdayFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            meal = getArguments().getParcelableArrayList("MealArrayList");
         }
+
+        dietArrayList = new ArrayList<>();
+        for(Meal temp: meal){
+
+            if(temp.getDay().equals("Wednesday")){
+                dietArrayList.add(temp);
+            }
+
+        }
+
+        Toast.makeText(getActivity(), "wed"+ dietArrayList.toString() , Toast.LENGTH_SHORT).show();
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wednesday, container, false);
+        View view = inflater.inflate(R.layout.fragment_wednesday, container, false);
+//        TextView asdWed = (TextView) view.findViewById(R.id.asdWed);
+//        asdWed.setText(dietArrayList.toString());
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewWedDietMeal);
+        RecyclerAdapterDietMeals recyclerAdapterDietMeals = new RecyclerAdapterDietMeals(dietArrayList , getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation_fall_down);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.setAdapter(recyclerAdapterDietMeals);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

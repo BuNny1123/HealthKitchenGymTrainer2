@@ -2,30 +2,60 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@drawable/nav_header_background">
+    android:layout_height="75dp"
+    android:background="@drawable/background_gradient_toolbar">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="25dp"
+        android:layout_centerInParent="true">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_back_arrow_white"
-            android:layout_gravity="left"
             android:id="@+id/food_toolbar_backarrow"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Food Items"
-            android:textSize="22sp"
+            android:text="Kitchen"
+            android:textSize="18dp"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:textColor="#ffff"
-            android:id="@+id/food_toolbar_Title"/>
+            android:id="@+id/food_toolbar_Title"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:fontFamily="iFont"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick Picks"
+            android:textSize="16dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#ffff"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|right"
+            android:id="@+id/quickPicks"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textSize="16dp"
+            android:textColor="#ffff"
+            android:layout_marginRight="10dp"
+            android:id="@+id/nextFoodActivity"
+            android:gravity="right|center_vertical"
+            />
+
+
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/background_orange_circle">
+
+        <ImageView
+            android:id="@+id/removeCard_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sub_white_foodcardbtn"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/food_card_cart_button"/>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:text="00"
+            android:textColor="#ffff"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="1"
+            android:id="@+id/foodCartNoOfItems_text"
+            android:gravity="center"/>
+
+
+        <ImageView
+            android:id="@+id/addCard_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_white_foodcardbtn"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/food_card_cart_button"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

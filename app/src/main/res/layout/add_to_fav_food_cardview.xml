@@ -1,0 +1,19 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/orange_bottom_right_rounded_corner_background"
+    android:id="@+id/foodItemBuyButton"
+    >
+
+    <TextView
+        android:id="@+id/addToQuickPick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Quick Pick"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:textColor="#fff"/>
+
+</RelativeLayout>

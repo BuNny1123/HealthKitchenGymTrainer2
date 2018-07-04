@@ -33,8 +33,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_sub_white_foodCardBtn" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="outputName" value="ic_remove_black" />
                                     </map>
                                   </option>
                                 </PersistentState>
